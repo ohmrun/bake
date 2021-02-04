@@ -52,6 +52,6 @@ class Baking{
 
   public function toString(){
     var rt = is_runtime ? 'runtime' : 'macrotime';
-    return 'Bake($id $root $target [$rt] $home)';
+    return 'Bake($id root:$root $target [$rt] home:$home)';
   }
 }
