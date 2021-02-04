@@ -1,0 +1,18 @@
+-cp src/main/haxe
+
+--macro stx.bake.Plugin.use()
+
+
+-lib asys
+-lib stx_log
+-lib stx_nano
+-lib stx_ds
+-lib stx_bake
+
+-lib stx_makro
+
+-D analyzer-optimize
+-D no-deprecation-warnings
+
+-main Main
+--interp

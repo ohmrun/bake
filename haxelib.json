@@ -1,0 +1,21 @@
+{
+    "name": "stx_bake",
+    "license": "MIT",
+    "tags": [
+        "cross",
+        "functional"
+    ],
+    "description": "",
+    "contributors": [
+        "0b1kn00b"
+    ],
+    "releasenote": "see CHANGELOG.md",
+    "version": "0.1.0",
+    "url": "https://github.com/ohmrun/stx_bake",
+    "dependencies": {
+        "tink_core"     : "git:https://github.com/haxetink/tink_core.git",
+        "stx_pico"      : "git:https://github.com/ohmrun/stx_pico.git",
+        "hx3compat"     : ""
+    },
+    "classPath": "src/main/haxe"
+}
