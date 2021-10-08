@@ -11,7 +11,7 @@ class GetTarget{
     for(expr in exprs){
       for(opt in expr){
         for(str in opt.snd()){
-          var idx = build.args.prj().indexOf(str);
+          var idx = build.args.index_of((x) -> x == str);
           if(idx!=-1){
             target = Some(opt.fst());
             break;

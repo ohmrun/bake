@@ -24,13 +24,14 @@ class Baking{
     return stx.bake.Baking.instance == null;
   }
   public var root(default,null):haxe.io.Path;
-  public var classpaths(default,null):Array<String>;
-  public var args(default,null):Array<String>;
+  public var classpaths(default,null):Cluster<String>;
+  public var args(default,null):Cluster<String>;
   public var id(default,null):String;
-  public var defines(default,null):Array<stx.nano.Field<String>>;
+  public var defines(default,null):Cluster<stx.nano.Field<String>>;
+  //public var resources(default,null):Map<String,Bytes>;
   public var home(default,null):String;
 
-  public function new(root,classpaths,args,defines,home){
+  public function new(root,classpaths,args,defines:Cluster<stx.nano.Field<String>>,home){
     this.root       = root;
     this.classpaths = classpaths;
     this.args       = args;
