@@ -19,7 +19,7 @@ import stx.makro.expr.TypeDefinition;
 
 import stx.bake.makro.*;
 
-@:access(stx.bake)class Plugin{
+@:access(stx.bake) class Plugin{
   static var printer = new Printer();
   macro static function use(){
     __.log().info("stx.bake.Plugin.use");
