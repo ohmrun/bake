@@ -8,6 +8,8 @@ import haxe.macro.Expr;
 import haxe.macro.ExprTools;
 import haxe.macro.MacroStringTools;
 
+import stx.nano.CompilerTarget.CompilerTargetSum;
+
 import stx.bake.makro.*;
 
 /**
@@ -15,6 +17,7 @@ import stx.bake.makro.*;
   `__.bake` returns `Baking.instance` at macro-time and `stx.build.Baked` at compile time.
   If your program is looking for `Baked`, there was a compiler error.
 **/
+@:using(stx.bake.Baking.BakingLift)
 @:keep
 class Baking{ 
   @:allow(stx.Bake) static private var instance(default,null) : stx.bake.Baking; 
@@ -54,5 +57,36 @@ class Baking{
   public function toString(){
     var rt = is_runtime ? 'runtime' : 'macrotime';
     return 'Bake($id root:$root $target [$rt] home:$home)';
+  }
+}
+class BakingLift{
+  static public function get_build_location(baking:Baking):Option<String>{
+    return baking.target.flat_map(
+      (target:CompilerTarget) -> target.toBuildDirective().map(__.couple.bind(target))
+    ).flat_map(
+      __.decouple((target,id) -> {
+          final arr = ['--${id}','-${id}'];
+          final idx = arr.lfold(
+            (n:String,m:Option<Int>) -> m.fold(
+              ok -> __.option(ok),
+              () -> {
+                final i = baking.args.index_of(x -> n == x); 
+                return switch(i){
+                  case -1 : None;
+                  default : Some(i);
+                }
+              }
+            ),
+            None
+          ); 
+
+        return idx.flat_map(
+          (i) -> switch(target){
+            case Interp   : None;
+            default       : Some(baking.args[i+1]); 
+          }
+        );
+      })
+    );
   }
 }

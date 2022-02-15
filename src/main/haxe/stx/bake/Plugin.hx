@@ -28,7 +28,7 @@ import stx.bake.makro.*;
     var cp                                           = Context.getClassPath();
     var args                                         = std.Sys.args();
     var defines : Cluster<stx.nano.Field<String>>    = Context.getDefines().keyValueIterator().toIter().lfold(
-      (next,memo:Cluster<stx.nano.Field<String>>) -> memo.snoc(stx.nano.Field.create(next.key,next.value)),
+      (next,memo:Cluster<stx.nano.Field<String>>) -> memo.snoc(stx.nano.Field.make(next.key,next.value)),
       Cluster.unit()
     );
     var resources   = Context.getResources();
