@@ -89,4 +89,21 @@ class BakingLift{
       })
     );
   }
+  static public function get_main(baking:Baking):Option<String>{
+    final result = baking.args.lfold(
+      (n:String,m:{ data : Null<String>, done : Bool }) -> switch(m){
+        case { done : false } : 
+          ['-main','--main'].any(
+            (str) -> str == m.data
+          ).if_else(
+            () -> { done : true, data : n },
+            () -> { done : false, data : n }
+          );
+        case { done : true }   :
+          m;
+      },
+      { done : false, data : null }
+    );
+    return result.done == true ? __.option(result.data) : __.option(null); 
+  }
 }
