@@ -93,6 +93,16 @@ class BakingLift{
       })
     );
   }
+  static public function get_build_directory(self:Baking){
+    return get_build_location(self).flat_map(
+      (string) -> self.target.map(
+          target -> target.uses_file().if_else(
+            () -> haxe.io.Path.directory(string),
+            () -> string
+        )
+      )
+    );
+  }
   static public function get_main(baking:Baking):Option<String>{
     final result = baking.args.lfold(
       (n:String,m:{ data : Null<String>, done : Bool }) -> switch(m){
