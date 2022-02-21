@@ -60,9 +60,9 @@ class Baking{
   }
 }
 class BakingLift{
-  static public function get_build_location(baking:Baking):Option<String>{
-    __.log().debug(_ -> _.pure(baking.target));
-    return baking.target.flat_map(
+  static public function get_build_location(self:Baking):Option<String>{
+    __.log().debug(_ -> _.pure(self.target));
+    return self.target.flat_map(
       (target:CompilerTarget) -> target.toBuildDirective().map(__.couple.bind(target))
     ).flat_map(
       __.decouple((target,id) -> {
@@ -72,7 +72,7 @@ class BakingLift{
             (n:String,m:Option<Int>) -> m.fold(
               ok -> __.option(ok),
               () -> {
-                final i = baking.args.index_of(x -> n == x); 
+                final i = self.args.index_of(x -> n == x); 
                 return switch(i){
                   case -1 : None;
                   default : Some(i);
@@ -85,8 +85,10 @@ class BakingLift{
         return idx.flat_map(
           (i) -> switch(target){
             case Interp   : None;
-            default       : Some(baking.args[i+1]); 
+            default       : Some(self.args[i+1]); 
           }
+        ).map(
+          (tail) -> haxe.io.Path.addTrailingSlash(self.root.toString()) + tail
         );
       })
     );
