@@ -16,7 +16,7 @@ import stx.bake.makro.*;
   @google "Type not found : stx.build.Baked"
   `__.bake` returns `Baking.instance` at macro-time and `stx.build.Baked` at compile time.
   If your program is looking for `Baked`, there was a compiler error.
-**/
+**/ 
 @:using(stx.bake.Baking.BakingLift)
 @:keep
 class Baking{ 
@@ -61,10 +61,12 @@ class Baking{
 }
 class BakingLift{
   static public function get_build_location(baking:Baking):Option<String>{
+    __.log().debug(_ -> _.pure(baking.target));
     return baking.target.flat_map(
       (target:CompilerTarget) -> target.toBuildDirective().map(__.couple.bind(target))
     ).flat_map(
       __.decouple((target,id) -> {
+          __.log().trace(_ -> _.pure(id));
           final arr = ['--${id}','-${id}'];
           final idx = arr.lfold(
             (n:String,m:Option<Int>) -> m.fold(
