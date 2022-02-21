@@ -11,7 +11,10 @@ class GetTarget{
     for(expr in exprs){
       for(opt in expr){
         for(str in opt.snd()){
-          var idx = build.args.index_of((x) -> x == str);
+          //__.log().debug(str);
+          var idx = build.args.index_of(
+            (x) -> (x == '-$str') || (x == '--$str')
+          );
           if(idx!=-1){
             target = Some(opt.fst());
             break;
