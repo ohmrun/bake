@@ -1,6 +1,6 @@
 package stx.bake;
 
-using stx.Sys;
+using stx.System;
 
 class Env extends Clazz{
   public function is_windows(){

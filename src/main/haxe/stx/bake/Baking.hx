@@ -42,13 +42,10 @@ class Baking{
     this.defines    = defines;
     this.home       = home;
   }
-  #if (!macro)
-    public function publish(tdef:TypeDefinition){}
-  #else
-    public function publish(tdef:TypeDefinition){
-      return Generate.apply(this,tdef);
-    }
-  #end
+  public function publish(tdef:TypeDefinition){
+    trace("PUBLISH!!");
+    return Generate.apply(this,tdef);
+  }
   public var target(get,null) : Option<CompilerTarget>;
   private function get_target(){
     return GetTarget.apply(this);

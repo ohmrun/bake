@@ -8,9 +8,17 @@ class Generate{
     var name    = tdef.name;
     var classes = self.root.into(gen);
     var str     = classes.into(tdef.pack).into('$name.hx');
-    __.log().trace('building: $str');
+    __.log().info('building: $classes $str');
 
-    sys.io.File.saveContent(str.toString(),to_disk);
+    try{
+      sys.FileSystem.createDirectory(classes.into(tdef.pack).toString());
+      sys.io.File.saveContent(str.toString(),to_disk);
+      
+    }catch(e:haxe.Exception){
+      __.log().fatal(e.toString());
+      throw(e);
+    }
+    
 
   }
 }

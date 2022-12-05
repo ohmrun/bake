@@ -17,8 +17,7 @@
         "stx_pico"      : "git:https://github.com/ohmrun/stx_pico.git",
         "stx_ds"        : "git:https://github.com/ohmrun/stx_ds.git",
         "stx_makro"     : "git:https://github.com/ohmrun/stx_makro.git",
-        
-        "hx3compat"     : ""
+        "stx_asys"      : "git:https://github.com/ohmrun/stx_asys.git"
     },
     "classPath": "src/main/haxe"
 }

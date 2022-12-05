@@ -15,7 +15,7 @@ import haxe.io.Bytes;
 import haxe.macro.Expr;
 import haxe.macro.Printer;
 import haxe.macro.Context;
-import stx.makro.expr.TypeDefinition;
+import stx.makro.Def;
 
 import stx.bake.makro.*;
 
@@ -40,8 +40,8 @@ import stx.bake.makro.*;
        
     stx.bake.Baking.instance = new stx.bake.Baking(new haxe.io.Path(cwd),cp,args,defines,home);
     
-    var self              = Ident.fromIdentifier(__.ident("stx.bake.Baked"));
-    var parent            = Ident.fromIdentifier(__.ident("stx.bake.Baking"));
+    var self              = __.way('stx.bake').into('Baked');
+    var parent            = __.way('stx.bake').into('Baking');
     
     var parent_tpath      = TPath({ name : parent.name, pack : parent.pack});
     var kind              = TDAbstract(parent_tpath,[],[parent_tpath]);
@@ -62,7 +62,7 @@ import stx.bake.makro.*;
       access  : [APublic],
       pos     : Context.currentPos()
     } 
-    var tdef : TypeDefinition = {
+    var tdef : HTypeDefinition = {
       meta    : [{name : ":forward", pos : Context.currentPos()}],
       name    : self.name,
       pack    : self.pack,
