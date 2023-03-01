@@ -13,11 +13,11 @@
     "version": "0.1.0",
     "url": "https://github.com/ohmrun/stx_bake",
     "dependencies": {
-        "tink_core"     : "git:https://github.com/haxetink/tink_core.git",
-        "stx_pico"      : "git:https://github.com/ohmrun/stx_pico.git",
-        "stx_ds"        : "git:https://github.com/ohmrun/stx_ds.git",
-        "stx_makro"     : "git:https://github.com/ohmrun/stx_makro.git",
-        "stx_asys"      : "git:https://github.com/ohmrun/stx_asys.git"
+        "tink_core"     : "",
+        "stx_pico"      : "",
+        "stx_ds"        : "",
+        "stx_makro"     : "",
+        "stx_asys"      : ""
     },
     "classPath": "src/main/haxe"
 }
