@@ -18,7 +18,7 @@ During the Macro stage, the type is called `Baking`, during runtime, it's called
 
 ```haxe
   public var is_runtime(get,null):Bool;
-  public var root(default,null):haxe.io.Path;
+  public var root(default,null):haxe.io.Path;//Build root
   //see get_build_location for guessing the current build folder
   public var classpaths(default,null):Array<String>;
   public var args(default,null):Array<String>;
