@@ -12,6 +12,7 @@
     "version": "0.1.1",
     "url": "https://github.com/ohmrun/bake",
     "dependencies": {
+        
     },
     "classPath": "src/main/haxe"
 }

@@ -12,7 +12,23 @@ import haxe.macro.Context;
 
 import bake.makro.*;
 
+private typedef Pos = 
+#if macro
+haxe.macro.Expr.Position
+#else
+haxe.PosInfos;
+#end
+
 @:access(bake) class Plugin{
+  static public function note(v:Dynamic,?pos:Pos){
+    #if debug
+      #if macro
+      haxe.Log.trace(v);
+      #else
+      haxe.Log.trace(v,pos);
+      #end
+    #end
+  }
   static var printer = new Printer();
   macro static function use(){
     var cwd         = std.Sys.getCwd();
@@ -24,8 +40,14 @@ import bake.makro.*;
     for(key => val in defines_map){
       defines.push({key : key, value : val});
     }
-    var resources   = Context.getResources();
-    
+    final is_eval     = defines.search(x -> x.key == 'eval');
+    note('is_eval:   $is_eval');
+    final is_interp   = defines.search(x -> x.key == 'interp');
+    note('is_interp: $is_interp');
+    final target_name = defines.search(x -> x.key == 'target.name');
+    note('target_name: $target_name');
+    var resources     = Context.getResources();
+    note(Bake.is_macro());
     var session     = Util.uuid();
         Context.addResource("bake.session.id",Bytes.ofString(session));
 

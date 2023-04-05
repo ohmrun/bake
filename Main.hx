@@ -6,5 +6,11 @@ class Main {
 		trace(bake.args);
 		trace(bake.get_build_location());
 		trace(bake.defines);
+		trace(bake);
+	}
+	static public macro function macro_time(){
+		final bake = Bake.pop();
+		trace(bake);
+		return macro {};
 	}
 }

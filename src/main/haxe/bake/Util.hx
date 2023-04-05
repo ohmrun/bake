@@ -105,7 +105,20 @@ class ArrayUtil{
     },false);
   }
 
-
+  /**
+    * Produces an `Option.Some(element)` the first time the predicate returns `true`,
+    * `None` otherwise.
+	**/
+  static public function search<T>(self:Array<T>,fn:T->Bool):Option<T>{
+    var out = None;
+    for(el in self){
+      if(fn(el)){
+        out = Some(el);
+        break;
+      }
+    }
+    return out;
+  }
 }
 class TargetUtil{
   static public function uses_file(self:String):Bool{
