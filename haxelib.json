@@ -1,23 +1,18 @@
 {
-    "name": "stx_bake",
+    "name": "bake",
     "license": "MIT",
     "tags": [
-        "cross",
-        "functional"
+        "macro"
     ],
-    "description": "",
+    "description": "Consistent access to build data in macro and runtime contexts",
     "contributors": [
         "0b1kn00b"
     ],
     "releasenote": "see CHANGELOG.md",
     "version": "0.1.0",
-    "url": "https://github.com/ohmrun/stx_bake",
+    "url": "https://github.com/ohmrun/bake",
     "dependencies": {
-        "tink_core"     : "",
-        "stx_pico"      : "",
-        "stx_ds"        : "",
-        "stx_makro"     : "",
-        "stx_asys"      : ""
+        "uuid" : ""
     },
     "classPath": "src/main/haxe"
 }

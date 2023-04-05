@@ -12,6 +12,6 @@ During the Macro stage, the type is called `Baking`, during runtime, it's called
   public var classpaths(default,null):Cluster<String>;
   public var args(default,null):Cluster<String>;
   public var id(default,null):String;//Generates a uuid in Plugin
-  public var defines(default,null):Cluster<stx.nano.Field<String>>;
+  public var defines(default,null):Cluster<nano.Field<String>>;
   public var home(default,null):String;
 ```

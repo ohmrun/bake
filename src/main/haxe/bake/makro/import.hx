@@ -1,3 +1,3 @@
-package stx.bake;
+package bake;
 
 import haxe.macro.Expr;

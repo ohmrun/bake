@@ -1,1 +1,1 @@
---macro stx.bake.Plugin.use()
+--macro bake.Plugin.use()

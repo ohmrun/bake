@@ -1,47 +1,40 @@
-package stx.bake;
+package bake;
 
 #if macro
-using stx.Pico;
-using stx.Nano;
-using stx.Ds;
-using stx.Log;
 
 
-import stx.nano.Field in HaxeField;
-
-import stx.bake.Env;
+import bake.Env;
 import haxe.io.Bytes;
 
 import haxe.macro.Expr;
 import haxe.macro.Printer;
 import haxe.macro.Context;
-import stx.makro.Def;
 
-import stx.bake.makro.*;
+import bake.makro.*;
 
-@:access(stx.bake) class Plugin{
+@:access(bake) class Plugin{
   static var printer = new Printer();
   macro static function use(){
-    __.log().info("stx.bake.Plugin.use");
     var cwd         = std.Sys.getCwd();
       
     var cp                                           = Context.getClassPath();
     var args                                         = std.Sys.args();
-    var defines : Cluster<stx.nano.Field<String>>    = Context.getDefines().keyValueIterator().toIter().lfold(
-      (next,memo:Cluster<stx.nano.Field<String>>) -> memo.snoc(stx.nano.Field.make(next.key,next.value)),
-      Cluster.unit()
-    );
+    var defines_map                                  = Context.getDefines();
+    var defines = [];
+    for(key => val in defines_map){
+      defines.push({key : key, value : val});
+    }
     var resources   = Context.getResources();
     
-    var session     = __.uuid();
-        Context.addResource("stx.bake.session.id",Bytes.ofString(session));
+    var session     = uuid.Uuid.short();
+        Context.addResource("bake.session.id",Bytes.ofString(session));
 
-    var home        = new Env().home().fudge();
+    var home        = new Env().home().fudge('home environment variable not found');
        
-    stx.bake.Baking.instance = new stx.bake.Baking(new haxe.io.Path(cwd),cp,args,defines,home);
+    bake.Baking.instance = new bake.Baking(new haxe.io.Path(cwd),cp,args,defines,home);
     
-    var self              = __.way('stx.bake').into('Baked');
-    var parent            = __.way('stx.bake').into('Baking');
+    var self              = { pack : ['bake'], name : 'Baked' };
+    var parent            = { pack : ['bake'], name : 'Baking'};
     
     var parent_tpath      = TPath({ name : parent.name, pack : parent.pack});
     var kind              = TDAbstract(parent_tpath,[],[parent_tpath]);
@@ -52,17 +45,17 @@ import stx.bake.makro.*;
         args  : [],
         ret   : null,
         expr  : macro this = 
-          new stx.bake.Baking(
+          new bake.Baking(
             new haxe.io.Path($v{cwd}),
-            stx.nano.Cluster.lift($v{cp}),
-            stx.nano.Cluster.lift($v{args}),
-            stx.nano.Cluster.lift($v{defines}.map((kv) -> stx.nano.Field.lift({ key : kv.key, val : kv.val}))),
+            $v{cp},
+            $v{args},
+            $v{defines}.map((kv) -> bake.Field.lift({ key : kv.key, value : kv.value})),
             $v{home})
       }),
       access  : [APublic],
       pos     : Context.currentPos()
     } 
-    var tdef : HTypeDefinition = {
+    var tdef : TypeDefinition = {
       meta    : [{name : ":forward", pos : Context.currentPos()}],
       name    : self.name,
       pack    : self.pack,

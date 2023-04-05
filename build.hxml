@@ -1,15 +1,7 @@
 -cp src/main/haxe
+-lib uuid;
 
---macro stx.bake.Plugin.use()
-
-
--lib stx_log
--lib stx_nano
--lib stx_ds
-
--lib stx_bake
-
--lib stx_makro
+--macro bake.Plugin.use()
 
 -D analyzer-optimize
 -D no-deprecation-warnings

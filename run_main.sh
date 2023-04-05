@@ -1,0 +1,1 @@
+haxe -lib stx_log -lib stx_nano -lib stx_ds -lib stx_bake -lib stx_makro --run Main
