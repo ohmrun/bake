@@ -12,6 +12,17 @@ class Util{
   @:noUsing static public function env(str:String){
     return option(Sys.getEnv(str));
   }
+/**
+  Returns a unique identifier, each `x` replaced with a hex character.
+**/
+@:noUsing static public function uuid(value : String = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx') : String {
+  var reg = ~/[xy]/g;
+  return reg.map(value, function(reg) {
+      var r = std.Std.int(Math.random() * 16) | 0;
+      var v = reg.matched(0) == 'x' ? r : (r & 0x3 | 0x8);
+      return StringTools.hex(v);
+  }).toLowerCase();
+}
 }
 class OptionUtil{
   static public function is_defined<T>(opt:Option<T>){

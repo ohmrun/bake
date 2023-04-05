@@ -26,7 +26,7 @@ import bake.makro.*;
     }
     var resources   = Context.getResources();
     
-    var session     = uuid.Uuid.short();
+    var session     = Util.uuid();
         Context.addResource("bake.session.id",Bytes.ofString(session));
 
     var home        = new Env().home().fudge('home environment variable not found');

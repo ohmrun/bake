@@ -12,7 +12,6 @@
     "version": "0.1.0",
     "url": "https://github.com/ohmrun/bake",
     "dependencies": {
-        "uuid" : ""
     },
     "classPath": "src/main/haxe"
 }
