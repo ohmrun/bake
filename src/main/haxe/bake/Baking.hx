@@ -14,7 +14,7 @@ import bake.makro.*;
 
 /**
   @google "Type not found : build.Baked"
-  `__.bake` returns `Baking.instance` at macro-time and `build.Baked` at compile time.
+  `Bake.pop()` returns `Baking.instance` at macro-time and `build.Baked` at compile time.
   If your program is looking for `Baked`, there was a compiler error.
 **/ 
 @:using(bake.Baking.BakingLift)
