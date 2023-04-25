@@ -21,11 +21,11 @@ haxe.PosInfos;
 
 @:access(bake) class Plugin{
   static public function note(v:Dynamic,?pos:Pos){
-    #if debug
+    #if (debug && bake.switches.debug==true)
       #if macro
-      haxe.Log.trace(v);
+        haxe.Log.trace(v);
       #else
-      haxe.Log.trace(v,pos);
+        haxe.Log.trace(v,pos);
       #end
     #end
   }

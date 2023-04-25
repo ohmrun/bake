@@ -61,6 +61,7 @@ class BakingLift{
     return self.target.flat_map(
       (target) -> {
           final arr = ['--${target}','-${target}'];
+          //trace(arr);
           final idx = arr.fold(
             (n:String,m:Option<Int>) -> m.fold(
               ok -> Util.option(ok),
