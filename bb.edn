@@ -1,3 +1,11 @@
-{
-  {:deps {/ {:local/root ""}}}
-}
+
+  {
+    :deps {
+        com.walmartlabs/dyn-edn {:mvn/version "0.2.0"}
+      ohmrun/haxelib
+      {
+        :local/root  ".local/bertha/i/src/ohmrun/bertha/main/bb"
+      }
+    }
+    ;; :paths ["src" ".build"]
+  }
