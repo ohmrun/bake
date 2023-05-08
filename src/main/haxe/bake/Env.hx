@@ -1,6 +1,7 @@
 package bake;
 
 class Env{
+  #if (sys || nodejs)
   public function new(){}
   public function is_windows(){
     var sys_name = std.Sys.systemName();
@@ -30,4 +31,5 @@ class Env{
       }
     );
   }
+  #end
 }

@@ -1,3 +1,13 @@
 {
-  
-}
+  "build" : {
+    "-cp" : "src/main/haxe",
+    "unit" : {
+      "--macro" : [
+        "include('bake',true)"
+      ],
+      "javascript" : {
+        "--js" : "build/javascript/main.js"
+      }
+    }
+  }
+}  

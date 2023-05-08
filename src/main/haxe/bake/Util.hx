@@ -9,9 +9,11 @@ class Util{
       case x    : Some(x);
     }
   }
+  #if (sys || nodejs)
   @:noUsing static public function env(str:String){
     return option(Sys.getEnv(str));
   }
+  #end
 /**
   Returns a unique identifier, each `x` replaced with a hex character.
 **/
