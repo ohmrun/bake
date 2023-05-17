@@ -51,7 +51,7 @@ haxe.PosInfos;
     var session     = Util.uuid();
         Context.addResource("bake.session.id",Bytes.ofString(session));
 
-    var home        = Env().home().fudge('home environment variable not found');
+    var home        = Env.home().fudge('home environment variable not found');
        
     bake.Baking.instance = new bake.Baking(new haxe.io.Path(cwd),cp,args,defines,home);
     
