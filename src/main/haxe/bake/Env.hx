@@ -3,11 +3,11 @@ package bake;
 class Env{
   #if (sys || nodejs)
   public function new(){}
-  public function is_windows(){
+  static public function is_windows(){
     var sys_name = std.Sys.systemName();
     return sys_name == "Windows";
   }
-  public function home():Option<String>{
+  static public function home():Option<String>{
     var home = null;
     return is_windows().if_else(
       () -> {
@@ -30,6 +30,13 @@ class Env{
         return Util.env("HOME");
       }
     );
+  }
+  /**
+   * Produces platform temp folder.
+   * @returns Option<String>
+   */
+  static public function temp_folder(){
+    return is_windows() ? Util.env("temp") : Util.option("/tmp");
   }
   #end
 }
