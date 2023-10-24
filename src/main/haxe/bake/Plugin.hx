@@ -51,9 +51,8 @@ haxe.PosInfos;
     var session     = Util.uuid();
         Context.addResource("bake.session.id",Bytes.ofString(session));
 
-    var home        = Env.home().fudge('home environment variable not found');
        
-    bake.Baking.instance = new bake.Baking(new haxe.io.Path(cwd),cp,args,defines,home);
+    bake.Baking.instance = new bake.Baking(new haxe.io.Path(cwd),cp,args,defines);
     
     var self              = { pack : ['bake'], name : 'Baked' };
     var parent            = { pack : ['bake'], name : 'Baking'};
@@ -71,8 +70,8 @@ haxe.PosInfos;
             new haxe.io.Path($v{cwd}),
             $v{cp},
             $v{args},
-            $v{defines}.map((kv) -> bake.Field.lift({ key : kv.key, value : kv.value})),
-            $v{home})
+            $v{defines}.map((kv) -> bake.Field.lift({ key : kv.key, value : kv.value}))
+          )
       }),
       access  : [APublic],
       pos     : Context.currentPos()

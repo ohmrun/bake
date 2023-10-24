@@ -32,15 +32,13 @@ class Baking{
   public var id(default,null):String;
   public var defines(default,null):Array<bake.Field<String>>;
   //public var resources(default,null):Map<String,Bytes>;
-  public var home(default,null):String;
 
-  public function new(root,classpaths,args,defines:Array<bake.Field<String>>,home){
+  public function new(root,classpaths,args,defines:Array<bake.Field<String>>){
     this.root       = root;
     this.classpaths = classpaths;
     this.args       = args;
     this.id         = haxe.Resource.getString("bake.session.id");//sneaking this around via haxe.Resource in a macro.
     this.defines    = defines;
-    this.home       = home;
   }
   // public function publish(tdef:TypeDefinition){
   //   trace("PUBLISH!!");
@@ -53,7 +51,7 @@ class Baking{
 
   public function toString(){
     var rt = is_runtime ? 'runtime' : 'macrotime';
-    return 'Bake($id root:$root $target [$rt] home:$home)';
+    return 'Bake($id root:$root $target [$rt])';
   }
 }
 class BakingLift{
