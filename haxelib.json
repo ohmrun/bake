@@ -1,18 +1,16 @@
 {
-    "name": "bake",
-    "license": "MIT",
-    "tags": [
-        "macro"
-    ],
-    "description": "Consistent access to build data in macro and runtime contexts",
-    "contributors": [
-        "0b1kn00b"
-    ],
-    "releasenote": "Initial release",
-    "version": "0.6.0",
-    "url": "https://github.com/ohmrun/bake",
-    "dependencies": {
-        
-    },
-    "classPath": "src/main/haxe"
+	"name": "bake",
+	"description": "Consistent access to build data in macro and runtime contexts",
+	"classPath": "src/main/haxe",
+	"dependencies": {},
+	"url": "https://github.com/ohmrun/bake",
+	"contributors": [
+		"0b1kn00b"
+	],
+	"version": "0.6.0",
+	"releasenote": "Initial release",
+	"tags": [
+		"macro"
+	],
+	"license": "MIT"
 }
