@@ -8,8 +8,8 @@
     "contributors": [
         "0b1kn00b"
     ],
-    "releasenote": "see CHANGELOG.md",
-    "version": "0.5.0",
+    "releasenote": "Initial release",
+    "version": "0.6.0",
     "url": "https://github.com/ohmrun/bake",
     "dependencies": {
         

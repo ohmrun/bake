@@ -1,16 +1,17 @@
 
 class Main {
 	static function main() {
-		trace("Hello, world!");
+		macro_time();
+
 		final bake = Bake.pop();
-		trace(bake.args);
-		trace(bake.get_build_location());
-		trace(bake.defines);
-		trace(bake);
+		
+		trace(bake.timestamp);
+		// trace(bake);
 	}
 	static public macro function macro_time(){
 		final bake = Bake.pop();
-		trace(bake);
+		//trace(bake.args);
+		trace(bake.timestamp);
 		return macro {};
 	}
 }

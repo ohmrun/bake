@@ -1,0 +1,8 @@
+-main Main
+-cp src/main/haxe
+--macro bake.Plugin.use()
+--interp
+
+-----------------------
+
+Build completed with 0 successes and 0 failures.

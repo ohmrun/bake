@@ -31,15 +31,20 @@ haxe.PosInfos;
   }
   static var printer = new Printer();
   macro static function use(){
-    var cwd         = std.Sys.getCwd();
+    // Context.registerCustomDefine(
+    
+    // )
+    var cwd                                          = std.Sys.getCwd();
       
     var cp                                           = Context.getClassPath();
     var args                                         = std.Sys.args();
     var defines_map                                  = Context.getDefines();
-    var defines = [];
+    var defines                                      = [];
     for(key => val in defines_map){
       defines.push({key : key, value : val});
     }
+    final timestamp                                  = Date.now().toString();
+
     final is_eval     = defines.search(x -> x.key == 'eval');
     note('is_eval:   $is_eval');
     final is_interp   = defines.search(x -> x.key == 'interp');
@@ -48,11 +53,11 @@ haxe.PosInfos;
     note('target_name: $target_name');
     var resources     = Context.getResources();
     note(Bake.is_macro());
-    var session     = Util.uuid();
+    var session       = Util.uuid();
         Context.addResource("bake.session.id",Bytes.ofString(session));
 
        
-    bake.Baking.instance = new bake.Baking(new haxe.io.Path(cwd),cp,args,defines);
+    bake.Baking.instance = new bake.Baking(new haxe.io.Path(cwd),cp,args,defines,timestamp);
     
     var self              = { pack : ['bake'], name : 'Baked' };
     var parent            = { pack : ['bake'], name : 'Baking'};
@@ -70,7 +75,8 @@ haxe.PosInfos;
             new haxe.io.Path($v{cwd}),
             $v{cp},
             $v{args},
-            $v{defines}.map((kv) -> bake.Field.lift({ key : kv.key, value : kv.value}))
+            $v{defines}.map((kv) -> bake.Field.lift({ key : kv.key, value : kv.value})),
+            $v{timestamp}
           )
       }),
       access  : [APublic],

@@ -5,8 +5,29 @@
       "--macro" : [
         "include('bake',true)"
       ],
+      "interp" : {
+        "--interp" : "interp"
+      },
       "javascript" : {
         "--js" : "build/javascript/main.js"
+      }
+    },
+    "main" : {
+      "--macro" :  "bake.Plugin.use()",
+      "-main" : "Main",
+      "interp" : {
+        "--interp" : true
+      },
+      "javascript" : {
+        "--js" : "build/javascript/main.js"
+      }
+    },
+    "test" : {
+      "-cp"   : "src/test/haxe",
+      "-L"    : ["stx_test","stx_log"],
+      "-main" : "bake.Test",
+      "interp" : {
+        "--interp" : true
       }
     }
   }

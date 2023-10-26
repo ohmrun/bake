@@ -3,3 +3,4 @@
 /.ninja
 /.local/bertha
 /build
+/.clj-kondo

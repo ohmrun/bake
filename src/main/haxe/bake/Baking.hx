@@ -31,21 +31,19 @@ class Baking{
   public var args(default,null):Array<String>;
   public var id(default,null):String;
   public var defines(default,null):Array<bake.Field<String>>;
-  //public var resources(default,null):Map<String,Bytes>;
+  public var timestamp(default,null):String;
 
-  public function new(root,classpaths,args,defines:Array<bake.Field<String>>){
+  public function new(root,classpaths,args,defines:Array<bake.Field<String>>,timestamp){
     this.root       = root;
     this.classpaths = classpaths;
     this.args       = args;
     this.id         = haxe.Resource.getString("bake.session.id");//sneaking this around via haxe.Resource in a macro.
     this.defines    = defines;
+    this.timestamp  = timestamp;
   }
-  // public function publish(tdef:TypeDefinition){
-  //   trace("PUBLISH!!");
-  //   return Generate.apply(this,tdef);
-  // }
   public var target(get,null) : Option<String>;
   private function get_target(){
+    trace("sd");
     return GetTarget.apply(this);
   }
 
@@ -58,8 +56,14 @@ class BakingLift{
   static public function get_build_location(self:Baking):Option<String>{
     return self.target.flat_map(
       (target) -> {
+        return if(target == 'interp'){
+          Util.option(self.root.toString());
+        }else{
           final arr = ['--${target}','-${target}'];
-          //trace(arr);
+          #if (stx_log || stx)
+          __.log().trace(arr);
+          #end
+          
           final idx = arr.fold(
             (n:String,m:Option<Int>) -> m.fold(
               ok -> Util.option(ok),
@@ -74,25 +78,16 @@ class BakingLift{
             None
           ); 
 
-        return idx.flat_map(
-          (i) -> switch(target){
-            case 'interp'   : None;
-            default         : Some(self.args[i+1]); 
-          }
-        ).map(
-          (tail) -> haxe.io.Path.addTrailingSlash(self.root.toString()) + tail
-        );
+          idx.flat_map(
+            (i) -> switch(target){
+              case 'interp'   : None;
+              default         : Some(self.args[i+1]); 
+            }
+          ).map(
+            (tail) -> haxe.io.Path.addTrailingSlash(self.root.toString()) + tail
+          );
+        }
       });
-  }
-  static public function get_build_directory(self:Baking){
-    return get_build_location(self).flat_map(
-      (string) -> self.target.map(
-          target -> target.uses_file().if_else(
-            () -> haxe.io.Path.directory(string),
-            () -> string
-        )
-      )
-    );
   }
   static public function get_main(baking:Baking):Option<String>{
     final result = baking.args.fold(

@@ -7,7 +7,13 @@ class GetTarget{
     var target                = None;
     for(t in types){
       var idx = build.args.index_of(
-        (x) -> (x == '-$t') || (x == '--$t')
+        (x:String) -> {
+          //trace('$t');
+          final short = (x == '-$t');
+          final long  = (x == '--$t');
+          //trace('"$x" == "-${t}" $short "$x" == "--${t}" $long');
+          return short || long;
+        }
       );
       if(idx!=-1){
         target = Some(t);

@@ -1,5 +1,9 @@
 package ;
 
+#if (stx_log || stx)
+  using stx.Nano;
+  using stx.Log;
+#end
 import bake.Baking;
 
 class Bake{
@@ -13,16 +17,20 @@ class Bake{
   }
   #end
   static public function pop(){
-    #if macro
+    #if (macro)
       //__.log()("macro bake");
-      trace("macro bake");
+      #if (stx_log || stx)
+      __.log().trace("macro bake");
+      #end
       #if(debug)
         //trace(bake.Baking.instance.toString());
       #end
       return bake.Baking.instance;//Need to call any build macros after stx_build plugin is called.
     #else
       //__.log()("runtime bake");
-      trace("runtime bake");
+      #if (stx_log || stx)
+      __.log().trace("runtime bake");
+      #end
       #if(debug)
         //trace(new bake.Baked().toString());
       #end
